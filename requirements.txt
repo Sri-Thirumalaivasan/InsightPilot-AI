@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+plotly
+ollama
+openpyxl
+python-dotenv
+reportlab
