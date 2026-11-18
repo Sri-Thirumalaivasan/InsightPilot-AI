@@ -206,7 +206,7 @@ if len(df.columns) == 0:
 # retain the original dataframe so exports do not silently change it.
 numeric_columns = df.select_dtypes(include="number").columns.tolist()
 categorical_columns = df.select_dtypes(
-    include=["object", "category", "bool"]
+    include=["object", "str", "category", "bool"]
 ).columns.tolist()
 
 date_columns = []
@@ -284,7 +284,7 @@ with overview_tab:
         st.subheader("Dataset Preview")
         st.dataframe(
             df.head(12),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -308,7 +308,7 @@ with overview_tab:
         )
         st.dataframe(
             quality_data,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -327,7 +327,7 @@ with overview_tab:
             "Unique Values": df.nunique(dropna=True).values,
         }
     )
-    st.dataframe(profile, use_container_width=True, hide_index=True)
+    st.dataframe(profile, width="stretch", hide_index=True)
 
 
 # =========================================================
@@ -404,7 +404,7 @@ with explore_tab:
             xaxis_title=x_column,
             yaxis_title=y_column,
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     else:
         st.info(
@@ -480,7 +480,7 @@ with explore_tab:
 
                 st.dataframe(
                     result_table,
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                 )
 
@@ -492,7 +492,7 @@ with explore_tab:
                     text_auto=".2s",
                     template="plotly_dark",
                 )
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
             else:
                 st.info("No suitable grouping columns were found.")
 
@@ -522,7 +522,7 @@ with explore_tab:
                     )
                     st.dataframe(
                         result_table,
-                        use_container_width=True,
+                        width="stretch",
                         hide_index=True,
                     )
 
@@ -535,7 +535,7 @@ with explore_tab:
                             title=f"Monthly {selected_metric}",
                             template="plotly_dark",
                         )
-                        st.plotly_chart(fig, use_container_width=True)
+                        st.plotly_chart(fig, width="stretch")
                 except Exception as error:
                     st.error(f"Unable to calculate the monthly trend: {error}")
             else:
@@ -544,13 +544,13 @@ with explore_tab:
         elif analysis_type == "Column Summary":
             st.dataframe(
                 get_column_summary(df),
-                use_container_width=True,
+                width="stretch",
             )
 
         elif analysis_type == "Statistical Summary":
             st.dataframe(
                 df[numeric_columns].describe().round(2),
-                use_container_width=True,
+                width="stretch",
             )
     else:
         st.warning("No numeric columns are available for analysis.")
@@ -592,7 +592,7 @@ First five records:
         )
         ask_button = st.form_submit_button(
             "✨ Ask InsightPilot AI",
-            use_container_width=True,
+            width="stretch",
         )
 
     if ask_button:
@@ -631,7 +631,7 @@ First five records:
                     st.subheader("Calculation Results")
                     st.dataframe(
                         result["table"],
-                        use_container_width=True,
+                        width="stretch",
                         hide_index=True,
                     )
 
@@ -659,7 +659,7 @@ First five records:
                                 template="plotly_dark",
                             )
 
-                        st.plotly_chart(fig, use_container_width=True)
+                        st.plotly_chart(fig, width="stretch")
 
 
 # =========================================================
@@ -689,7 +689,7 @@ with reports_tab:
                 )
                 st.dataframe(
                     anomalies,
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                 )
 
@@ -747,7 +747,7 @@ with reports_tab:
                     "application/vnd.openxmlformats-officedocument."
                     "spreadsheetml.sheet"
                 ),
-                use_container_width=True,
+                width="stretch",
             )
 
         pdf_report = create_pdf_report(
@@ -763,7 +763,7 @@ with reports_tab:
                 data=pdf_report,
                 file_name="InsightPilot_Business_Report.pdf",
                 mime="application/pdf",
-                use_container_width=True,
+                width="stretch",
             )
 
     except Exception as error:
@@ -778,7 +778,7 @@ with reports_tab:
         data=csv_data,
         file_name="insightpilot_processed_data.csv",
         mime="text/csv",
-        use_container_width=True,
+        width="stretch",
     )
 
 
