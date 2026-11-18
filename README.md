@@ -1,59 +1,77 @@
 # InsightPilot AI
 
-**A local AI-powered data analytics workspace built with Python, Pandas, Streamlit, Plotly and Ollama.**
+> **A local LLM-assisted data analytics workspace for exploring datasets, answering business questions, and generating reports.**
 
-InsightPilot AI helps users explore CSV and Excel datasets, calculate business metrics, ask natural-language questions, identify patterns, and export business reports without sending dataset content to a paid hosted LLM API.
+Built with **Python · Pandas · Streamlit · Plotly · Ollama · Qwen 2.5 1.5B**
 
-> **Project status:** Working local MVP. The included built-in demo dataset has 10 records and 5 columns. Use your own CSV or `.xlsx` file to analyse other datasets.
+InsightPilot AI lets users upload CSV and Excel files, inspect data quality, explore interactive visualisations, ask supported questions in natural language, discover business findings, and export Excel/PDF reports. Supported numerical questions are calculated with Pandas; the local LLM is used as a fallback for contextual questions.
+
+<p align="center">
+  <img src="docs/images/dashboard-showcase.jpg" alt="InsightPilot AI dashboard screens: overview, explore data, AI analyst, and insights and reports" width="800">
+</p>
+
+<p align="center">
+  <strong>Overview · Explore Data · AI Analyst · Insights & Reports</strong>
+</p>
+
+---
 
 ## Features
 
-- **Dataset upload:** Load CSV and Excel (`.xlsx`) files.
-- **Dataset overview:** Inspect row and column counts, missing values, duplicates, data types and unique values.
-- **Interactive analytics:** Build Plotly bar charts by choosing a categorical field, numeric measure and aggregation.
-- **Pandas-powered question routing:** Handles supported questions such as total/average sales or profit, highest-performing product/category, top-N rankings and monthly trends.
-- **Local LLM fallback:** Uses Ollama with Qwen 2.5 1.5B to answer questions that are not handled by the deterministic analytics router.
-- **Automatic business insights:** Summarises sales, profit, product/category performance and potential sales outliers using the IQR method.
-- **Business recommendations:** Generates rule-based recommendations from available product, category and profitability metrics.
-- **Report exports:** Creates multi-sheet Excel reports and PDF business analytics reports.
-- **Dataset export:** Download the active dataset as CSV.
-
-## Technology stack
-
-| Area | Technology |
+| Area | What it does |
 |---|---|
-| User interface | Streamlit |
-| Data processing | Python, Pandas, NumPy |
-| Interactive charts | Plotly Express |
-| Local language model | Ollama, Qwen 2.5 1.5B |
-| Excel input/output | Pandas, OpenPyXL |
-| PDF reports | ReportLab |
+| Dataset upload | Loads CSV and Excel (.xlsx) files |
+| Dataset overview | Shows records, columns, missing values, duplicates, data preview and column profile |
+| Visual analytics | Builds interactive Plotly charts from selected dimensions and numeric measures |
+| Advanced analytics | Calculates totals, averages, top performers, monthly trends and column summaries |
+| Natural-language questions | Routes supported questions to deterministic Pandas calculations |
+| Local LLM fallback | Uses Ollama with Qwen 2.5 1.5B for questions not covered by the query router |
+| Automatic business insights | Summarises sales/profit metrics, product/category performance and potential IQR outliers |
+| Business recommendations | Produces rule-based recommendations based on detected dataset metrics |
+| Business reports | Exports multi-sheet Excel workbooks and PDF analytics reports |
+| Dataset download | Exports the active DataFrame as CSV |
+
+## Screenshots
+
+The showcase above contains real captures of the running local Streamlit application:
+
+- **Overview:** workspace header, dataset status and KPI cards.
+- **Explore Data:** interactive sales-by-product chart with selectable dimensions and aggregation.
+- **AI Analyst:** question form and calculated response.
+- **Insights & Reports:** automated findings and report/recommendation sections.
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    A[User] --> B[Streamlit App]
-    B --> C[CSV / Excel Upload]
-    C --> D[Pandas DataFrame]
-    D --> E[Overview and Plotly Analytics]
-    D --> F[Question Router]
-    F --> G[Pandas Calculation Functions]
-    F -->|Unsupported question| H[Ollama + Qwen 2.5 1.5B]
-    D --> I[Business Insights Engine]
-    D --> J[Recommendation Engine]
-    G --> K[Answer and Results]
-    H --> K
-    I --> L[Excel / PDF Report Generator]
-    J --> L
-```
+![InsightPilot AI architecture](docs/architecture.svg)
 
-### Project structure
+The application is organised into four main layers:
+
+1. **Streamlit interface** — handles uploads, navigation, controls and output.
+2. **Pandas analytics** — profiles the active DataFrame and performs deterministic calculations.
+3. **Question handling** — routes recognised analytical questions to Pandas; uses the local Ollama/Qwen model for fallback contextual responses.
+4. **Insight and report generation** — produces business findings, rule-based recommendations, Excel workbooks and PDF reports.
+
+## Technology stack
+
+| Component | Technology |
+|---|---|
+| Language | Python 3.11 |
+| UI | Streamlit |
+| Data manipulation | Pandas, NumPy |
+| Visualisation | Plotly Express |
+| Local LLM runtime | Ollama |
+| Model | Qwen 2.5 1.5B |
+| Excel support | OpenPyXL |
+| PDF generation | ReportLab |
+
+## Project structure
 
 ```text
 InsightPilot-AI/
 ├── app.py
 ├── requirements.txt
+├── README.md
+├── .gitignore
 ├── core/
 │   ├── calculations.py
 │   ├── insights_engine.py
@@ -63,24 +81,29 @@ InsightPilot-AI/
 │   └── test_llm.py
 ├── reports/
 │   └── report_generator.py
+├── docs/
+│   ├── architecture.svg
+│   └── images/
+│       └── dashboard-showcase.jpg
 ├── test_calculations.py
 ├── test_report.py
 └── test_pdf_report.py
 ```
 
-## Requirements
+## Getting started (Windows PowerShell)
 
-- Windows 10/11 or another environment that supports Python and Ollama.
-- Python 3.11 recommended (the project was developed and tested with Python 3.11.5).
-- Ollama installed and running locally.
-- Enough free memory and disk space for the selected local model. A small model is used in this project to reduce resource requirements; performance depends on the computer.
+### Prerequisites
 
-## Installation (Windows PowerShell)
+- Python 3.11
+- Git
+- Ollama installed locally
+- Enough available RAM and disk space to run the selected local model (performance depends on hardware)
 
-### 1. Extract and open the project
+### 1. Clone the repository
 
 ```powershell
-cd "path\to\InsightPilot-AI"
+git clone https://github.com/Sri-Thirumalaivasan/InsightPilot-AI.git
+cd InsightPilot-AI
 ```
 
 ### 2. Create and activate a virtual environment
@@ -90,114 +113,113 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-If PowerShell blocks activation, run this in the current terminal and retry:
+If PowerShell blocks script activation in the current terminal:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\venv\Scripts\Activate.ps1
 ```
 
-### 3. Install Python dependencies
+### 3. Install dependencies
 
 ```powershell
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Install Ollama and download the model
+### 4. Install and prepare the local model
 
-Install Ollama from [ollama.com/download](https://ollama.com/download).
-
-Then run:
+Install Ollama from [ollama.com/download](https://ollama.com/download), then pull the model:
 
 ```powershell
 ollama pull qwen2.5:1.5b
 ollama list
 ```
 
-The application uses the model name `qwen2.5:1.5b`, configured in `core/llm_engine.py`. Make sure the Ollama service is running before using the LLM fallback.
+The model name is configured in `core/llm_engine.py`. Ollama must be running for the LLM fallback feature. Recognised Pandas analytical queries do not need the LLM.
 
-### 5. Start InsightPilot AI
+### 5. Run the application
 
 ```powershell
 streamlit run app.py
 ```
 
-Streamlit will print a local address, usually `http://localhost:8501`, which you can open in your browser.
+Open the local URL printed by Streamlit (normally `http://localhost:8501`; if that port is busy, Streamlit may choose another).
 
 ## Example questions
 
-The Pandas question router recognises common question patterns, depending on whether the uploaded dataset contains matching column names:
+The query router recognises common question patterns when matching columns exist in the uploaded data:
 
-- `What is the total sales?`
-- `What is the total profit?`
-- `What is the average sales?`
-- `Which product generated the highest sales?`
-- `Which category generated the highest sales?`
-- `Show the top 5 products by sales.`
-- `Which month had the highest sales?`
+```text
+What is the total sales?
+What is the total profit?
+What is the average sales?
+Which product generated the highest sales?
+Which category generated the highest sales?
+Show the top 5 products by sales.
+Which month had the highest sales?
+```
 
-Column matching currently recognises common names such as `sales`, `revenue`, `profit`, `product`, `category` and `date` (including selected alternatives defined in `core/query_router.py`).
+Column-name matching is intentionally limited to common business fields and the alternatives defined in `core/query_router.py`. Questions outside the supported patterns are sent to the local LLM with a compact dataset context.
 
-## How answers are produced
+## How the AI answers questions
 
-InsightPilot AI prioritises deterministic Pandas calculations for supported analytical questions. This means totals, averages, rankings and monthly aggregations are calculated from the dataframe rather than asking the language model to perform arithmetic.
-
-For questions not recognised by the router, the application sends a compact dataset context (column types, missing-value counts, numeric summary and sample rows) to the local Ollama model. The model is instructed to use the supplied context and not invent numbers.
+- **Supported analytics:** Pandas calculates values from the full active DataFrame. This avoids asking a language model to perform arithmetic or invent rankings.
+- **Contextual fallback:** Qwen receives the column names/types, missing-value counts, numeric summary and a small sample of records. It does not receive a full-dataset representation.
+- **Recommendations:** Business recommendations are rule-based suggestions derived from detected metrics; they are not model-generated predictions.
 
 ## Reports
 
-The **Insights & Reports** tab can generate:
+The **Insights & Reports** tab generates:
 
-- An Excel workbook with report information, KPI summary, dataset, product ranking, category ranking when a category field is available, business insights and recommendations.
-- A PDF report containing dataset overview, KPIs, product/category performance, insights and recommendations.
+- **Excel:** report information, KPI summary, source dataset, product ranking, category ranking when a category field exists, business insights and recommendations.
+- **PDF:** dataset overview, KPIs, available product/category rankings, business insights and recommendations.
 
-Reports are generated from the currently active dataframe. The built-in demo dataset is only a demonstration dataset, not real company data.
+Reports are generated from the currently active DataFrame. The built-in sample dataset contains **10 rows and 5 columns** and is demonstration data, not real company data. When a file is uploaded, the report reflects that uploaded dataset.
 
 ## Run the included checks
 
-From the project root, with the virtual environment activated:
+Run commands from the project root with the virtual environment activated:
 
 ```powershell
+python -m compileall app.py core reports
 python test_calculations.py
 python test_report.py
 python test_pdf_report.py
 ```
 
-The LLM connection test is in `core/test_llm.py`:
+To test the local model connection (Ollama must be running and the model pulled):
 
 ```powershell
 python core/test_llm.py
 ```
 
-Run that test only after installing Ollama, pulling the configured model and starting the Ollama service.
-
 ## Current limitations
 
-- The question router supports a defined set of question patterns and common column names; it is not a general-purpose natural-language-to-SQL engine.
-- The local LLM fallback receives a limited dataset context rather than the entire raw dataset.
-- Business recommendations are rule-based suggestions, not predictions or professional business advice.
-- IQR flags identify potential outliers; an outlier is not automatically an error.
-- The app currently supports CSV and `.xlsx` uploads.
-- Model response quality and speed depend on local hardware and available memory.
+- The query router supports known question patterns and common column names; it is not a general-purpose natural-language-to-SQL engine.
+- The local LLM fallback receives a compact dataset context rather than every row.
+- Category or product-name analysis requires those columns (or an appropriate lookup table) to exist in the uploaded data.
+- IQR outlier detection identifies potential anomalies, not necessarily incorrect records.
+- Recommendations are rules-based prompts for investigation, not professional business advice.
+- The current upload interface supports CSV and .xlsx files.
 
-## Future enhancements
+## Future improvements
 
-- More flexible column mapping and date detection.
-- Additional analytical question types and safer query planning.
-- More chart types and downloadable chart images.
-- Configurable report branding and PDF charts.
-- Automated tests for query routing, data-quality edge cases and report contents.
+- More flexible schema/column mapping and date detection.
+- Additional deterministic query types and automated tests for edge cases.
+- More chart types and chart exports.
+- PDF charts, report branding and custom date filters.
 - Optional database-backed analysis for larger datasets.
+- Configurable model selection and resource-aware model handling.
 
-## Privacy note
+## Privacy
 
-The application is designed for local use. Dataset calculations run in the local Python process, and the LLM integration uses the local Ollama service. Do not assume that every future integration or deployment is local; review any added external services before uploading confidential data.
+Dataset processing and report generation run in the local Python application. The LLM integration communicates with the local Ollama service. Review any future external integrations before using confidential or sensitive datasets.
 
 ## Author
 
-**InsightPilot AI** — developed as a hands-on Data Analytics and local-LLM project.
+**Sri Thirumalai Vasan S** — [GitHub](https://github.com/Sri-Thirumalaivasan)
 
 ---
 
-If you find an issue, include the Python version, the command you ran and the full error message when reporting it.
+*InsightPilot AI is a hands-on portfolio project demonstrating data analytics, dashboard development, local LLM integration and report automation.*
