@@ -168,6 +168,24 @@ Column-name matching is intentionally limited to common business fields and the 
 - **Contextual fallback:** Qwen receives the column names/types, missing-value counts, numeric summary and a small sample of records. It does not receive a full-dataset representation.
 - **Recommendations:** Business recommendations are rule-based suggestions derived from detected metrics; they are not model-generated predictions.
 
+## Deploy to Streamlit Community Cloud
+
+The dashboard can be deployed from this public GitHub repository:
+
+1. Open [Streamlit Community Cloud](https://share.streamlit.io/) and sign in with GitHub.
+2. Select **Create app**.
+3. Choose repository `Sri-Thirumalaivasan/InsightPilot-AI`.
+4. Select branch `main`.
+5. Set the app file path to `app.py`.
+6. In **Advanced settings**, select **Python 3.11** to match the tested local environment.
+7. Select **Deploy** and wait for the build logs to complete.
+
+The repository includes a root-level `requirements.txt`, which Community Cloud uses to install the Python dependencies.
+
+### Cloud deployment note: local Qwen model
+
+The public Streamlit app can run dataset uploads, Pandas calculations, Plotly charts, automatic insights, recommendations, and Excel/PDF exports in the cloud. The Qwen fallback uses Ollama. A cloud container cannot reach the Ollama service running on your personal computer through `localhost`. Therefore, Qwen fallback questions may show a notice on the public deployment unless you configure a separately hosted, securely accessible Ollama service. Supported Pandas analytical questions do not require Ollama.
+
 ## Reports
 
 The **Insights & Reports** tab generates:
