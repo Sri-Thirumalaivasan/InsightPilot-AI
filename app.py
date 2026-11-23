@@ -617,9 +617,13 @@ First five records:
                     except Exception as error:
                         answer = None
                         analysis_source = "Unavailable"
-                        st.error(
-                            "The local AI model could not answer this question. "
-                            f"Check that Ollama is running. Details: {error}"
+                        st.warning(
+                            "Qwen could not be reached from this app host. "
+                            "Pandas-powered analytical questions, charts, insights, "
+                            "and report exports remain available. The local Ollama "
+                            "service on your personal computer is not automatically "
+                            "accessible to a cloud deployment. To enable Qwen online, "
+                            "configure a securely hosted Ollama endpoint."
                         )
 
             if answer is not None:
