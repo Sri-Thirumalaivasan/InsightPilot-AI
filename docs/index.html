@@ -38,8 +38,39 @@
       margin: 0;
       padding: 0;
       border: 0;
+      outline: 0;
+      border-radius: 0;
       display: block;
       background: #0e1117;
+    }
+
+    /* Mask the thin light edge rendered inside the hosted embed. */
+    .edge-mask {
+      position: fixed;
+      z-index: 20;
+      background: #0e1117;
+      pointer-events: none;
+    }
+
+    .edge-mask.top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 9px;
+    }
+
+    .edge-mask.left {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+    }
+
+    .edge-mask.right {
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 4px;
     }
   </style>
 </head>
@@ -51,5 +82,8 @@
     allow="clipboard-read; clipboard-write"
     referrerpolicy="strict-origin-when-cross-origin">
   </iframe>
+  <div class="edge-mask top" aria-hidden="true"></div>
+  <div class="edge-mask left" aria-hidden="true"></div>
+  <div class="edge-mask right" aria-hidden="true"></div>
 </body>
 </html>
