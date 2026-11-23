@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e1117">
+  <meta name="description" content="InsightPilot AI — an AI-powered analytics workspace.">
+  <title>InsightPilot AI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      background: #0e1117;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #0e1117;
+    }
+
+    .app-frame {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #0e1117;
+    }
+
+    /*
+      Streamlit adds a small embed information bar at the bottom of some
+      embed views. This dark mask covers that strip so the dashboard appears
+      edge-to-edge. It sits outside the cross-origin iframe intentionally.
+    */
+    .bottom-mask {
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 54px;
+      background: #0e1117;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    class="app-frame"
+    src="https://insightpilot-ai-672g5ytcfudmzdwgfcmyrl.streamlit.app/?embed=true"
+    title="InsightPilot AI"
+    allow="clipboard-read; clipboard-write"
+    referrerpolicy="strict-origin-when-cross-origin">
+  </iframe>
+  <div class="bottom-mask" aria-hidden="true"></div>
+</body>
+</html>
