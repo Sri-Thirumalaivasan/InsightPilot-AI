@@ -1,8 +1,8 @@
-streamlit
-pandas
+streamlit==1.67.0
+pandas==3.1.1
 numpy
 plotly
 ollama
-openpyxl
+openpyxl==3.1.5
 python-dotenv
-reportlab
+reportlab==5.1.0
