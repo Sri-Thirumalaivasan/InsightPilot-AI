@@ -4,6 +4,10 @@
 
 Built with **Python · Pandas · Streamlit · Plotly · Ollama · Qwen 2.5 1.5B**
 
+## Live demo
+
+**[Open InsightPilot AI](https://insightpilot-ai-672g5ytcfudmzdwgfcmyrl.streamlit.app/)** — deployed on Streamlit Community Cloud.
+
 InsightPilot AI lets users upload CSV and Excel files, inspect data quality, explore interactive visualisations, ask supported questions in natural language, discover business findings, and export Excel/PDF reports. Supported numerical questions are calculated with Pandas; the local LLM is used as a fallback for contextual questions.
 
 <p align="center">
@@ -167,9 +171,11 @@ Column-name matching is intentionally limited to common business fields and the 
 - **Contextual fallback:** Qwen receives the column names/types, missing-value counts, numeric summary and a small sample of records. It does not receive a full-dataset representation.
 - **Recommendations:** Business recommendations are rule-based suggestions derived from detected metrics; they are not model-generated predictions.
 
-## Deploy to Streamlit Community Cloud
+## Deployment
 
-The dashboard can be deployed from this public GitHub repository:
+The public application is hosted on [Streamlit Community Cloud](https://share.streamlit.io/). The live link is available above.
+
+To recreate the deployment from this public GitHub repository:
 
 1. Open [Streamlit Community Cloud](https://share.streamlit.io/) and sign in with GitHub.
 2. Select **Create app**.
