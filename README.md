@@ -6,7 +6,7 @@ Built with **Python · Pandas · Streamlit · Plotly · Ollama · Qwen 2.5 1.5B*
 
 ## Live demo
 
-**[Open InsightPilot AI]((https://sri-thirumalaivasan.github.io/InsightPilot-AI/))** — deployed on Streamlit Community Cloud.
+**[Open InsightPilot AI](https://sri-thirumalaivasan.github.io/InsightPilot-AI/)** — deployed on Streamlit Community Cloud.
 
 InsightPilot AI lets users upload CSV and Excel files, inspect data quality, explore interactive visualisations, ask supported questions in natural language, discover business findings, and export Excel/PDF reports. Supported numerical questions are calculated with Pandas; the local LLM is used as a fallback for contextual questions.
 
