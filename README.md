@@ -7,7 +7,7 @@ Built with **Python · Pandas · Streamlit · Plotly · Ollama · Qwen 2.5 1.5B*
 InsightPilot AI lets users upload CSV and Excel files, inspect data quality, explore interactive visualisations, ask supported questions in natural language, discover business findings, and export Excel/PDF reports. Supported numerical questions are calculated with Pandas; the local LLM is used as a fallback for contextual questions.
 
 <p align="center">
-  <img src="docs/images/dashboard-showcase.jpg" alt="InsightPilot AI dashboard screens: overview, explore data, AI analyst, and insights and reports" width="800">
+  <img src="dashboard-showcase.jpg" alt="InsightPilot AI dashboard screens: overview, explore data, AI analyst, and insights and reports" width="800">
 </p>
 
 <p align="center">
@@ -82,9 +82,8 @@ InsightPilot-AI/
 ├── reports/
 │   └── report_generator.py
 ├── docs/
-│   ├── architecture.svg
-│   └── images/
-│       └── dashboard-showcase.jpg
+│   └── architecture.svg
+├── dashboard-showcase.jpg
 ├── test_calculations.py
 ├── test_report.py
 └── test_pdf_report.py
